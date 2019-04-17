@@ -12,10 +12,14 @@
         {
             "name": "Aris Karageorgos",
             "email": "aris@phe.me"
+        },
+        {
+            "name": "Alex Pogorelov",
+            "email": "shurik2k5@gmail.com"
         }
     ],
     "require": {
-        "yiisoft/yii2": ">=2.0.6",
+        "yiisoft/yii2": ">=2.0.13",
         "pheme/yii2-toggle-column": "*"
     },
     "require-dev": {
