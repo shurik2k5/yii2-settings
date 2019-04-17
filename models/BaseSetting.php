@@ -8,11 +8,10 @@
 namespace pheme\settings\models;
 
 use Yii;
+use yii\base\InvalidArgumentException;
 use yii\helpers\Json;
-use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-use yii\base\InvalidParamException;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -82,7 +81,7 @@ class BaseSetting extends ActiveRecord implements SettingInterface
                     ActiveRecord::EVENT_BEFORE_INSERT => 'created',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'modified',
                 ],
-                'value' => new Expression('NOW()'),
+                'value' => date('Y-m-d H:i:s'),//new Expression('NOW()'),
             ],
         ];
     }
@@ -221,9 +220,13 @@ class BaseSetting extends ActiveRecord implements SettingInterface
             return 'float';
         }
 
+        if (filter_var($value, FILTER_VALIDATE_FLOAT)) {
+            return 'float';
+        }
+
         $t = gettype($value);
 
-        if ($t === 'object' && !empty($value)) {
+        if ($t === 'string' && !empty($value)) {
             $error = false;
             try {
                 Json::decode($value);

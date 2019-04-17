@@ -53,16 +53,15 @@ class SettingModelTest extends TestCase
 
     public function testAdd()
     {
+        $this->model->key = "testAdd";
         $this->model->value = "i am value";
         $this->model->section = "testAdd";
         $this->model->type = 'integer';
         $this->model->modified = "i am created";
         $this->model->active = "1";
-        $this->model->save();
         $this->assertFalse($this->model->save(), 'value must be integer');
         $this->model->active = 0;
         $this->model->type = "string";
-        $this->model->save();
         $this->assertTrue($this->model->save());
         $this->assertTrue(1 == $this->model->delete());
     }

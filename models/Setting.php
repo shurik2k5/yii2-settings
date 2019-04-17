@@ -7,11 +7,10 @@
 
 namespace pheme\settings\models;
 
-use Yii;
 use yii\helpers\Json;
 use yii\base\DynamicModel;
 use pheme\settings\Module;
-use yii\base\InvalidParamException;
+use yii\base\InvalidArgumentException;
 
 /**
  * This is the model class for table "settings".
@@ -40,7 +39,7 @@ class Setting extends BaseSetting
                     $object = null;
                     try {
                         Json::decode($this->$attribute);
-                    } catch (InvalidParamException $e) {
+                    } catch (InvalidArgumentException $e) {
                         $this->addError($attribute, Module::t('settings', '"{attribute}" must be a valid JSON object', [
                             'attribute' => $attribute,
                         ]));
