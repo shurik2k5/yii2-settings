@@ -79,5 +79,12 @@ class BaseSettingModelTest extends TestCase
     {
         $res = $this->model->findSetting("testSetKey", "testSetKey");
         $this->assertTrue($res->id > 0);
+
+        $res2 = $this->model->findSetting("testSetKey.testSetKey");
+        $this->assertEquals($res->id, $res2->id);
+
+        $wrong_section_value = $this->model->findSetting('testSetKey.testSetKey.testSetKey');
+        $this->assertNull($wrong_section_value);
+
     }
 }

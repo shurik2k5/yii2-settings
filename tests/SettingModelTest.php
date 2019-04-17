@@ -60,10 +60,20 @@ class SettingModelTest extends TestCase
         $this->model->modified = "i am created";
         $this->model->active = "1";
         $this->assertFalse($this->model->save(), 'value must be integer');
+
         $this->model->active = 0;
         $this->model->type = "string";
         $this->assertTrue($this->model->save());
+
+        $this->model->type = 'object';
+        $this->model->value = '{"test":42}}';
+        $this->assertFalse($this->model->save(), 'save invalid json value');
+
+        $this->model->value = '{"test":42}';
+        $this->assertTrue($this->model->save(), 'save json value');
+
         $this->assertTrue(1 == $this->model->delete());
+
     }
 
     public function testUpdate()

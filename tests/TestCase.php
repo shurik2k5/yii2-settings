@@ -49,11 +49,16 @@ class TestCase extends PHPUnit_Framework_TestCase
                     ]
                 ],
                 'settings' => [
-                    'class' => 'pheme\settings\components\Settings'
+                    'class' => 'pheme\settings\components\Settings',
+                    'autoDecodeJson' => true,
                 ],
                 'cache' => [
                     'class' => 'yii\caching\ArrayCache'
                 ],
+                'frontCache' => [
+                    'class' => 'yii\caching\ArrayCache'
+                ],
+
             ],
             'modules' => [
                 'settings' => [

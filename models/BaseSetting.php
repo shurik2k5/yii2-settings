@@ -161,7 +161,6 @@ class BaseSetting extends ActiveRecord implements SettingInterface
         if ($model) {
             return $model->delete();
         }
-        return true;
     }
 
     /**
@@ -214,10 +213,6 @@ class BaseSetting extends ActiveRecord implements SettingInterface
 
         if (filter_var($value, FILTER_VALIDATE_INT)) {
             return 'integer';
-        }
-
-        if (filter_var($value, FILTER_VALIDATE_FLOAT)) {
-            return 'float';
         }
 
         if (filter_var($value, FILTER_VALIDATE_FLOAT)) {

@@ -268,7 +268,6 @@ class Settings extends Component
         if ($this->cache instanceof Cache) {
             return $this->cache->delete($this->cacheKey);
         }
-        return true;
     }
 
     /**

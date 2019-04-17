@@ -59,6 +59,10 @@ class ComponentSettingTest extends TestCase
     {
         $res = $this->setting->delete('testSetKey', 'testSetKey');
         $this->assertTrue($res == 1);
+
+        $this->setting->set('app.key', 'testValue');
+        $res = $this->setting->delete('app.key');
+        $this->assertTrue($res == 1);
     }
 
     public function testDeleteAll()
@@ -71,12 +75,20 @@ class ComponentSettingTest extends TestCase
     {
         $res = $this->setting->activate('testSetKey', 'testSetKey');
         $this->assertTrue($res);
+
+        $this->setting->deactivate('testSetKey', 'testSetKey');
+        $res = $this->setting->activate('testSetKey.testSetKey');
+        $this->assertTrue($res);
     }
 
     public function testDeActivate()
     {
         $this->setting->activate('testSetKey', 'testSetKey');
         $res = $this->setting->deactivate('testSetKey', 'testSetKey');
+        $this->assertTrue($res);
+
+        $this->setting->activate('testSetKey.testSetKey');
+        $res = $this->setting->deactivate('testSetKey.testSetKey');
         $this->assertTrue($res);
     }
 
@@ -86,6 +98,15 @@ class ComponentSettingTest extends TestCase
         $this->setting->get('testSetKey', 'testSetKey');
         $res = $this->setting->getRawConfig();
         $this->assertTrue($res['testSetKey']['testSetKey'][0] == $this->model->value);
+
+        $this->setting->cache = null;
+        $this->setting->clearCache();
+
+        $from_component = $this->setting->getRawConfig();
+        $from_model = $this->model->getSettings();
+
+        $this->assertSame($from_component, $from_model);
+
     }
 
     public function testClearCache()
@@ -148,4 +169,43 @@ class ComponentSettingTest extends TestCase
         $this->assertEquals('object', $model->type);
     }
 
+    public function testAutodetectWithInvalidJsonType()
+    {
+        $this->setting->set('app.json_invalid', '{"test":42');
+        $model = Setting::find()->where(['section' => 'app'])->andWhere(['key' => 'json_invalid'])->one();
+        $this->assertEquals('string', $model->type);
+    }
+
+    public function testAutodecodeJson()
+    {
+        $this->setting->set('app.json_auto', '{"test":42}');
+        $json = $this->setting->get('app.json_auto');
+
+        $this->assertEquals(42, $json['test']);
+    }
+
+    public function testDefaultGetValue()
+    {
+        $default = $this->setting->get('key', null, 'defaultTest');
+        $this->assertEquals('defaultTest', $default);
+    }
+
+    public function testFailSetValue()
+    {
+        $this->assertFalse($this->setting->set('app.key', 'test', null, 'invalid_type'));
+    }
+
+    public function testGetOrSetValue()
+    {
+        $this->assertFalse($this->setting->has('app.key'));
+        //test set value
+        $set_value = $this->setting->getOrSet('app.key', 22);
+        //test get value
+        $get_value = $this->setting->getOrSet('app.key', 100);
+
+        $this->assertEquals($set_value, $get_value);
+
+        $new_value = $this->setting->set('app.key', 100);
+        $this->assertEquals(100, $new_value);
+    }
 }
