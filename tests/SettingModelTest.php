@@ -6,7 +6,7 @@
  * Time: 下午3:56
  */
 
-namespace pheme\settings\tests;
+namespace shurik2k5\settings\tests;
 
 use pheme\settings\models\Setting;
 

@@ -30,7 +30,12 @@
     },
     "autoload": {
         "psr-4": {
-            "pheme\\settings\\": ""
+            "pheme\\settings\\": "./src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "shurik2k5\\settings\\tests\\": "./tests"
         }
     },
     "repositories": [

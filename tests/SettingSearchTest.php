@@ -6,7 +6,7 @@
  * Time: 上午11:29
  */
 
-namespace pheme\settings\tests;
+namespace shurik2k5\settings\tests;
 
 use pheme\settings\models\SettingSearch;
 

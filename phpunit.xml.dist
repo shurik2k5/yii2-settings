@@ -14,8 +14,8 @@
     </testsuites>
     <filter>
         <whitelist>
-            <directory suffix=".php">./models</directory>
-            <directory suffix=".php">./components</directory>
+            <directory suffix=".php">./src/models</directory>
+            <directory suffix=".php">./src/components</directory>
         </whitelist>
     </filter>
 </phpunit>

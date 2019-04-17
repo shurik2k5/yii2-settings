@@ -1,6 +1,6 @@
 <?php
 
-namespace pheme\settings\tests;
+namespace shurik2k5\settings\tests;
 
 use Yii;
 use pheme\settings\models\Setting;
@@ -87,8 +87,8 @@ class TestCase extends PHPUnit_Framework_TestCase
 
     protected function applyMigrations($db)
     {
-        require_once __DIR__ . '/../migrations/m140618_045255_create_settings.php';
-        require_once __DIR__ . '/../migrations/m151126_091910_add_unique_index.php';
+        require_once __DIR__ . '/../src/migrations/m140618_045255_create_settings.php';
+        require_once __DIR__ . '/../src/migrations/m151126_091910_add_unique_index.php';
 
         (new \m140618_045255_create_settings(['db' => $db, 'compact' => true]))->up();
         (new \m151126_091910_add_unique_index(['db' => $db, 'compact' => true]))->up();
