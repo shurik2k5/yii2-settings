@@ -1,5 +1,5 @@
 {
-    "name": "pheme/yii2-settings",
+    "name": "shurik2k5/yii2-settings",
     "description": "Yii2 Database settings",
     "type": "yii2-extension",
     "keywords": [
@@ -20,6 +20,9 @@
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
+    },
+    "conflict": {
+        "pheme/yii2-settings": "*"
     },
     "autoload": {
         "psr-4": {
