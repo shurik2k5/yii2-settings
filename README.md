@@ -1,12 +1,13 @@
-[![StyleCI](https://styleci.io/repos/99540308/shield?branch=master)](https://styleci.io/repos/99540308)
-[![Build Status](https://travis-ci.org/monster-hunter/yii2-settings.svg?branch=master)](https://travis-ci.org/monster-hunter/yii2-settings)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/monster-hunter/yii2-settings/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/monster-hunter/yii2-settings/?branch=master)
-[![Code Coverage](https://scrutinizer-ci.com/g/monster-hunter/yii2-settings/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/monster-hunter/yii2-settings/?branch=master)
+[![Build Status](https://api.travis-ci.org/shurik2k5/yii2-settings.svg?branch=master)](https://travis-ci.org/shurik2k5/yii2-settings)
+[![Total Downloads](https://img.shields.io/packagist/dt/shurik2k5/yii2-settings.svg)](https://packagist.org/packages/shurik2k5/yii2-settings)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/shurik2k5/yii2-settings/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/shurik2k5/yii2-settings/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/shurik2k5/yii2-settings/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/shurik2k5/yii2-settings/?branch=master)
 
 
 Yii2 Settings
 =============
-Yii2 Database settings
+Is fork of Yii2 Database settings [phemellc/yii2-settings](https://github.com/phemellc/yii2-settings) with improved and experimental features. 
+
 
 Installation
 ------------
@@ -35,6 +36,22 @@ Subsequently, run
 
 in order to create the settings table in your database.
 
+Migrate from phemellc/yii2-settings
+------------
+For use this package not need change you application configuration.\
+This package use same namespace as phemellc/yii2-settings that you can simply replace in composer.json
+```
+"pheme/yii2-settings": "*"
+```
+to 
+```
+"shurik2k5/yii2-settings": "*"
+```
+and run composer install/update
+```
+php composer.phar install
+```
+And that's all.
 
 Usage
 -----
@@ -75,6 +92,10 @@ $settings = Yii::$app->settings;
 $value = $settings->get('section.key');
 
 $value = $settings->get('key', 'section');
+
+$value = $this->setting->getOrSet('key', 'defaultValue', 'section', 'string');
+
+$value = $this->setting->getOrSet('section.key', 'defaultValue');
 
 $settings->set('section.key', 'value');
 
