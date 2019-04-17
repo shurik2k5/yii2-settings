@@ -31,7 +31,7 @@ to the require section of your `composer.json` file.
 Subsequently, run
 
 ```php
-./yii migrate/up --migrationPath=@vendor/pheme/yii2-settings/migrations
+./yii migrate/up --migrationPath=@vendor/shurik2k5/yii2-settings/migrations
 ```
 
 in order to create the settings table in your database.
