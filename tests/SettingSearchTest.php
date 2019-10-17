@@ -26,5 +26,8 @@ class SettingSearchTest extends TestCase
         $this->assertTrue($res->count == 1);
         $res1 = $model->search(['SettingSearch'=>[]]);
         $this->assertTrue($res1->count == 1);
+
+        $res = $model->search([['active' => 1]]);
+
     }
 }

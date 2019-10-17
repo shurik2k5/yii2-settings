@@ -100,4 +100,16 @@ class SettingModelTest extends TestCase
         $model = Setting::findOne(['active' => '1']);
         $this->assertTrue(1 == $model->delete());
     }
+
+    public function testIncorrectTypeSave()
+    {
+        $this->model->value = "i am value";
+        $this->model->section = "testUpdate";
+        $this->model->type = 'wrong';
+        $this->model->key = "testUpdate";
+        $this->model->active = "1";
+        $res = $this->model->save();
+        $this->assertFalse($res);
+        $this->assertArrayHasKey('type', $this->model->errors);
+    }
 }

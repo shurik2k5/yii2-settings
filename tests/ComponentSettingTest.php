@@ -198,12 +198,18 @@ class ComponentSettingTest extends TestCase
     public function testGetOrSetValue()
     {
         $this->assertFalse($this->setting->has('app.key'));
+
+        $testValue = 22;
         //test set value
-        $set_value = $this->setting->getOrSet('app.key', 22);
+        $set_value = $this->setting->getOrSet('key', $testValue, 'app');
+        $this->assertTrue($this->setting->has('app.key'));
+        $this->assertTrue($testValue === $set_value);
         //test get value
         $get_value = $this->setting->getOrSet('app.key', 100);
-
         $this->assertEquals($set_value, $get_value);
+        //wrong set
+        $wrong_value = $this->setting->getOrSet('test.wrong', 'value', null, 'wrong');
+        $this->assertNull($wrong_value);
 
         $new_value = $this->setting->set('app.key', 100);
         $this->assertEquals(100, $new_value);

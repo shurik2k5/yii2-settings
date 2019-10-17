@@ -181,14 +181,18 @@ class Settings extends Component
      * @param null $section
      * @param null $type
      *
-     * @return bool|mixed
+     * @return bool|mixed|null
      */
     public function getOrSet($key, $value, $section = null, $type = null)
     {
         if ($this->has($key, $section, true)) {
             return $this->get($key, $section);
         } else {
-            return $this->set($key, $value, $section, $type);
+            if ($this->set($key, $value, $section, $type)) {
+                return $value;
+            } else {
+                return null;
+            }
         }
     }
 

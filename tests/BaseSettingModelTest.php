@@ -8,6 +8,8 @@
 
 namespace shurik2k5\settings\tests;
 
+use pheme\settings\components\Settings;
+use pheme\settings\models\Setting;
 use Yii;
 
 class BaseSettingModelTest extends TestCase
@@ -82,6 +84,18 @@ class BaseSettingModelTest extends TestCase
 
         $res2 = $this->model->findSetting("testSetKey.testSetKey");
         $this->assertEquals($res->id, $res2->id);
+
+        $keyTest = 'findKey';
+
+        $model = new Setting();
+        $model->key = $keyTest;
+        $model->value = 'without section';
+        $model->section = '';
+        $model->type = 'string';
+        $model->save();
+
+        $res2 = $this->model->findSetting($keyTest);
+        self::assertEquals($model->value, $res2->value);
 
         $wrong_section_value = $this->model->findSetting('testSetKey.testSetKey.testSetKey');
         $this->assertNull($wrong_section_value);
